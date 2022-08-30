@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 public class MyConfiguration {
     @Bean
     public String applicationName(){
-        
+
         return "Sistema de Vendas";
     }
 

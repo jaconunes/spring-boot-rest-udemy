@@ -1,20 +1,10 @@
 package io.github.jaconunes.vendas.domain.repository;
 
-import io.github.jaconunes.vendas.domain.entity.Cliente;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public class ClientesRepository {
+import io.github.jaconunes.vendas.domain.entities.Cliente;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    private static String INSERT = "insert into cliente (nome) values (?) ";
+public interface ClientesRepository extends JpaRepository<Cliente, Integer> {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
 
-    public Cliente salvar(Cliente cliente){
-        jdbcTemplate.update(INSERT, new Object[]{cliente.getNome()});
-        return cliente;
-    }
 }

@@ -1,11 +1,17 @@
-package io.github.jaconunes.vendas.domain.entity;
+package io.github.jaconunes.vendas.domain.entities;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
 public class Pedido {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @ManyToOne
     private Cliente cliente;
     private LocalDate dataPedido;
     private BigDecimal total;

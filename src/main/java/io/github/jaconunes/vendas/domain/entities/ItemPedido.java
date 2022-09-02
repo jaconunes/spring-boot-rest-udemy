@@ -3,10 +3,12 @@ package io.github.jaconunes.vendas.domain.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "item_pedido")
 public class ItemPedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
 
     @ManyToOne
@@ -16,6 +18,8 @@ public class ItemPedido {
     @ManyToOne
     @JoinColumn(name = "produto_id")
     private Produto produto;
+
+    @Column
     private Integer quantidade;
 
     public Integer getId() {

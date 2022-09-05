@@ -5,7 +5,6 @@ import io.github.jaconunes.vendas.domain.repository.ClientesRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -39,7 +38,10 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Integer id){
         clientes.findById(id)
-                .map( cliente -> clientes.delete(cliente))
+                .map(cliente -> {
+                    clientes.delete(cliente);
+                    return cliente;
+                })
                 .orElseThrow(
                         () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado!")
                 );

@@ -2,10 +2,8 @@ package io.github.jaconunes.vendas.rest.controller;
 
 import io.github.jaconunes.vendas.domain.entities.ItemPedido;
 import io.github.jaconunes.vendas.domain.entities.Pedido;
-import io.github.jaconunes.vendas.rest.dto.InformacaoItemPedidoDTO;
-import io.github.jaconunes.vendas.rest.dto.InformacoesPedidoDTO;
-import io.github.jaconunes.vendas.rest.dto.ItemPedidoDTO;
-import io.github.jaconunes.vendas.rest.dto.PedidoDTO;
+import io.github.jaconunes.vendas.domain.enums.StatusPedido;
+import io.github.jaconunes.vendas.rest.dto.*;
 import io.github.jaconunes.vendas.service.PedidoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
@@ -41,6 +39,13 @@ public class PedidoController {
                 .map( p -> converter(p))
                 .orElseThrow( () ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
+    }
+
+    @PatchMapping("id")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDTO dto){
+        String novoStatus = dto.getNovoStatus();
+        pedidoService.atualizaStatus(id, StatusPedido.valueOf(novoStatus));
     }
 
     private InformacoesPedidoDTO converter(Pedido pedido){

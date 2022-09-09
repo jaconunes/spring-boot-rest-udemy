@@ -3,7 +3,6 @@ package io.github.jaconunes.vendas.rest.controller;
 import io.github.jaconunes.vendas.exception.RegraNegocioException;
 import io.github.jaconunes.vendas.rest.ApiErrors;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

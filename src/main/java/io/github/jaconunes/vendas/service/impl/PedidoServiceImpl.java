@@ -4,6 +4,7 @@ import io.github.jaconunes.vendas.domain.entities.Cliente;
 import io.github.jaconunes.vendas.domain.entities.ItemPedido;
 import io.github.jaconunes.vendas.domain.entities.Pedido;
 import io.github.jaconunes.vendas.domain.entities.Produto;
+import io.github.jaconunes.vendas.domain.enums.StatusPedido;
 import io.github.jaconunes.vendas.domain.repository.ClientesRepository;
 import io.github.jaconunes.vendas.domain.repository.ItensPedidoRespository;
 import io.github.jaconunes.vendas.domain.repository.PedidosRepository;
@@ -41,6 +42,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setTotal(dto.getTotal());
         pedido.setDataPedido(LocalDate.now());
         pedido.setCliente(cliente);
+        pedido.setStatus(StatusPedido.REALIZADO);
 
         List<ItemPedido> itemsPedido = converterItems(pedido, dto.getItems());
         pedidosRepository.save(pedido);

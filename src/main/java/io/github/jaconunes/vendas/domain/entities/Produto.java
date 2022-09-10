@@ -3,6 +3,8 @@ package io.github.jaconunes.vendas.domain.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 
@@ -19,9 +21,11 @@ public class Produto {
     private Integer id;
 
     @Column(name = "descricao")
+    @NotEmpty(message = "Campo descrição é obrigatório!")
     private String descricao;
 
     @Column(name = "preco_unitario")
+    @NotNull(message = "Campo preço é obrigatório!")
     private BigDecimal preco;
 
 }

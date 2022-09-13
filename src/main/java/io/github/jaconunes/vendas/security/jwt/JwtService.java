@@ -1,4 +1,4 @@
-package io.github.jaconunes.vendas;
+package io.github.jaconunes.vendas.security.jwt;
 
 import io.github.jaconunes.vendas.domain.entities.Usuario;
 import io.jsonwebtoken.Claims;
@@ -49,7 +49,7 @@ public class JwtService {
             Claims claims = obterClaims(token);
             Date dataExperiracao = claims.getExpiration();
             LocalDateTime data = dataExperiracao.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-            return !LocalDateTime.now().isAfter(data)
+            return !LocalDateTime.now().isAfter(data);
         } catch (Exception e){
             return false;
         }

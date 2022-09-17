@@ -2,6 +2,10 @@ package io.github.jaconunes.vendas.rest.controller;
 
 import io.github.jaconunes.vendas.domain.entities.Cliente;
 import io.github.jaconunes.vendas.domain.repository.ClientesRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
@@ -10,10 +14,10 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/clientes")
+@Api("Api Clientes")
 public class ClienteController {
 
     private ClientesRepository clientes;
@@ -23,6 +27,11 @@ public class ClienteController {
     }
 
     @GetMapping("{id}")
+    @ApiOperation("Obter detalhes de um cliente")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Cliente encontrado"),
+            @ApiResponse(code = 404, message = "Cliente não encontrado para o ID infomado")
+    })
     public Cliente getClienteById( @PathVariable Integer id){
         return clientes.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado!")
@@ -31,6 +40,11 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Salva um novo cliente")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Cliente salvo com sucesso"),
+            @ApiResponse(code = 400, message = "Erro de validação")
+    })
     public Cliente save( @RequestBody @Valid Cliente cliente){
         return clientes.save(cliente);
     }
